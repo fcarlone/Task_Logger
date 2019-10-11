@@ -2,9 +2,13 @@ const express = require("express");
 
 // Passport packages
 
+// Set up the express app
 const app = express();
 
 const PORT = process.env.PORT || 5000;
+
+// Models for syncing
+const db = require("./models");
 
 // Connect database
 
@@ -24,6 +28,13 @@ app.get("/", (req, res) => {
 });
 
 // Add listener
-app.listen(PORT, () => {
-  console.log(`Server started on Port: ${PORT}`);
+// app.listen(PORT, () => {
+//   console.log(`Server started on Port: ${PORT}`);
+// });
+
+// Syncing our sequelize models and then starting our Express app
+db.sequelize.sync({ force: true }).then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server started on Port: ${PORT}`);
+  });
 });
