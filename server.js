@@ -1,6 +1,8 @@
 const express = require("express");
 
 // Passport packages
+const session = require("express-session");
+const passport = require("./config/passport");
 
 // Set up the express app
 const app = express();
@@ -13,13 +15,20 @@ const db = require("./models");
 // Connect database
 
 // Middleware
+app.use(express.json({ extended: true }));
+app.use(
+  session({ secret: "keyboard cat", resave: true, saveUninitialized: true })
+);
 
 // Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Serve static assets
 
 // Define routes
-
+require("./routes/apiOwners")(app);
+require("./routes/apiUsers")(app);
 // Route to load single HTML page
 
 // Test route (DELETE after front-end build)
