@@ -28,7 +28,8 @@ app.use(passport.session());
 
 // Define routes
 require("./routes/apiOwners")(app);
-require("./routes/apiUsers")(app);
+// require("./routes/apiUsers")(app);
+
 // Route to load single HTML page
 
 // Test route (DELETE after front-end build)
