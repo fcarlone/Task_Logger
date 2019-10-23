@@ -1,9 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
   const Owner = sequelize.define("Owner", {
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
     firstName: {
       type: DataTypes.STRING,
       allowNull: false
@@ -25,5 +21,13 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     }
   });
+
+  // Model association
+  Owner.associate = function(models) {
+    Owner.hasMany(models.User, {
+      onDelete: "cascade"
+    });
+  };
+
   return Owner;
 };

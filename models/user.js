@@ -22,5 +22,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
 
+  // Model association
+  User.associate = function(models) {
+    User.belongsTo(models.Owner, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+  };
+
   return User;
 };

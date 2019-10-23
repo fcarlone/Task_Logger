@@ -6,13 +6,10 @@ const passport = require("./config/passport");
 
 // Set up the express app
 const app = express();
-
 const PORT = process.env.PORT || 5000;
 
-// Models for syncing
-const db = require("./models");
-
 // Connect database
+const db = require("./models");
 
 // Middleware
 app.use(express.json({ extended: true }));
@@ -28,7 +25,7 @@ app.use(passport.session());
 
 // Define routes
 require("./routes/apiOwners")(app);
-// require("./routes/apiUsers")(app);
+require("./routes/apiUsers")(app);
 
 // Route to load single HTML page
 
